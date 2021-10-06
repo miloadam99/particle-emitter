@@ -67,6 +67,35 @@ export class AlphaBehavior implements IEmitterBehavior
  * }
  * ```
  */
+export class RangedAlphaBehavior implements IEmitterBehavior
+{
+    public static type = 'alphaRanged';
+    public static editorConfig: BehaviorEditorConfig = null;
+
+    public order = BehaviorOrder.Normal;
+    private min: number;
+    private max: number;
+    constructor(config: {
+        min: number;
+        max: number;
+    })
+    {
+        this.min = config.min;
+        this.max = config.max;
+    }
+
+    initParticles(first: Particle): void
+    {
+        let next = first;
+
+        while (next)
+        {
+            next.alpha = Math.random() * (this.max - this.min) + this.min;
+            next = next.next;
+        }
+    }
+}
+
 export class StaticAlphaBehavior implements IEmitterBehavior
 {
     public static type = 'alphaStatic';
@@ -78,10 +107,10 @@ export class StaticAlphaBehavior implements IEmitterBehavior
         /**
          * Transparency of the particles from 0 (transparent) to 1 (opaque)
          */
-        alpha: number;
-    })
+         value: number;
+        })
     {
-        this.value = config.alpha;
+        this.value = config.value;
     }
 
     initParticles(first: Particle): void
