@@ -1,11 +1,11 @@
 {
-  "name": "@pixi/particle-emitter",
+  "name": "@miloadam99/particle-emitter-improved",
   "version": "5.0.2",
   "main": "lib/particle-emitter.js",
   "module": "lib/particle-emitter.es.js",
   "bundle": "dist/particle-emitter.js",
   "typings": "lib/index.d.ts",
-  "description": "Particle emitter for Pixi.js",
+  "description": "Particle emitter for Pixi.js with xtra features.",
   "author": "Andrew Start <start.andrew@gmail.com>",
   "contributors": [
     {
@@ -98,5 +98,5 @@
       "test/pixi-v6-module"
     ]
   },
-  "private": true
+  "private": false
 }

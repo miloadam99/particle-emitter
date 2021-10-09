@@ -78,6 +78,10 @@
   "resolved" "https://registry.npmjs.org/@jsbits/get-package-version/-/get-package-version-1.0.3.tgz"
   "version" "1.0.3"
 
+"@miloadam99/particle-emitter@file:/Users/morissey/Documents/GitHub/particle-emitter":
+  "resolved" "file:"
+  "version" "5.0.2"
+
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -314,7 +318,7 @@
     "@pixi/display" "6.0.4"
     "@pixi/math" "6.0.4"
 
-"@pixi/particle-emitter@*", "@pixi/particle-emitter@file:/Users/morissey/Documents/GitHub/particle-emitter":
+"@pixi/particle-emitter@*":
   "resolved" "file:"
   "version" "5.0.2"
 

@@ -1,3 +1,4 @@
+import { ParticleUtils } from '..';
 import { Particle } from '../Particle';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
@@ -87,21 +88,38 @@ export class StaticScaleBehavior implements IEmitterBehavior
     public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
+    private scale : PropertyList<number>
     private min: number;
     private max: number;
+    private scaleDuration: number;
+    private isSpawnFullyScaled: boolean;
+
     constructor(config: {
-        /**
-         * Minimum scale of the particles, with a minimum value of 0
-         */
-        min: number;
-        /**
-         * Maximum scale of the particles, with a minimum value of 0
-         */
-        max: number;
-    })
+            min: number,
+            max: number,
+            scaleDuration: number,
+            isSpawnFullyScaled: boolean
+        })
     {
         this.min = config.min;
         this.max = config.max;
+        this.scaleDuration = config.scaleDuration;
+        this.isSpawnFullyScaled = config.isSpawnFullyScaled;
+
+        this.scale = new PropertyList(false);
+        this.scale.reset(PropertyNode.createList({
+            list: [
+                {
+                    value: 0,
+                    time: 0
+                }, 
+                {
+                    value: 1,
+                    time: this.scaleDuration
+                },
+            ],
+            isStepped: false
+        }));
     }
 
     initParticles(first: Particle): void
@@ -110,11 +128,23 @@ export class StaticScaleBehavior implements IEmitterBehavior
 
         while (next)
         {
-            const scale = (Math.random() * (this.max - this.min)) + this.min;
+            const finalScale = (Math.random() * (this.max - this.min)) + this.min;
 
-            next.scale.x = next.scale.y = scale;
-
+            if (this.isSpawnFullyScaled) {
+                next.scale.x = next.scale.y = finalScale;
+            }   else {
+                next.scale.x = next.scale.y = 0;
+                next.config['finalScale'] = finalScale;
+            }
+        
             next = next.next;
+        }
+    }
+
+    updateParticle(particle: Particle, deltaSec: number): void
+    {
+        if (!this.isSpawnFullyScaled && particle.age < this.scaleDuration) {
+            particle.scale.x = particle.scale.y = this.scale.interpolate(particle.age / this.scaleDuration)
         }
     }
 }
