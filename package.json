@@ -1,6 +1,6 @@
 {
-  "name": "@miloadam99/particle-emitter-improved",
-  "version": "5.0.2",
+  "name": "@miloadam99/particle-emitter-plugin",
+  "version": "5.0.3",
   "main": "lib/particle-emitter.js",
   "module": "lib/particle-emitter.es.js",
   "bundle": "dist/particle-emitter.js",

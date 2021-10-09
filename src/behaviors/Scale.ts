@@ -143,8 +143,11 @@ export class StaticScaleBehavior implements IEmitterBehavior
 
     updateParticle(particle: Particle, deltaSec: number): void
     {
+        console.log('particle updated');
         if (!this.isSpawnFullyScaled && particle.age < this.scaleDuration) {
-            particle.scale.x = particle.scale.y = this.scale.interpolate(particle.age / this.scaleDuration)
+            let mult = this.scale.interpolate(particle.age / this.scaleDuration)
+            console.log(mult);
+            particle.scale.x = particle.scale.y = particle.config['finalScale'] * mult
         }
     }
 }
