@@ -73,8 +73,8 @@ export class RangedAlphaBehavior implements IEmitterBehavior
     public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
-    private min: number;
-    private max: number;
+    private readonly min: number;
+    private readonly max: number;
     constructor(config: {
         min: number;
         max: number;
@@ -90,7 +90,7 @@ export class RangedAlphaBehavior implements IEmitterBehavior
 
         while (next)
         {
-            next.alpha = Math.random() * (this.max - this.min) + this.min;
+            next.alpha = (Math.random() * (this.max - this.min)) + this.min;
             next = next.next;
         }
     }

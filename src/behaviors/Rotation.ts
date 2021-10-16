@@ -117,8 +117,8 @@ export class StaticRotationBehavior implements IEmitterBehavior
     public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
-    private min: number;
-    private max: number;
+    public min: number;
+    public max: number;
     constructor(config: {
         /**
          * Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.

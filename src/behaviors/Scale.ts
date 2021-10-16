@@ -1,4 +1,3 @@
-import { ParticleUtils } from '..';
 import { Particle } from '../Particle';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
@@ -88,11 +87,11 @@ export class StaticScaleBehavior implements IEmitterBehavior
     public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
-    private scale : PropertyList<number>
-    private min: number;
-    private max: number;
-    private scaleDuration: number;
-    private isSpawnFullyScaled: boolean;
+    private scale : PropertyList<number>;
+    public min: number;
+    public max: number;
+    public scaleDuration: number;
+    public isSpawnFullyScaled: boolean;
 
     constructor(config: {
             min: number,
@@ -112,7 +111,7 @@ export class StaticScaleBehavior implements IEmitterBehavior
                 {
                     value: 0,
                     time: 0
-                }, 
+                },
                 {
                     value: 1,
                     time: this.scaleDuration
@@ -130,24 +129,28 @@ export class StaticScaleBehavior implements IEmitterBehavior
         {
             const finalScale = (Math.random() * (this.max - this.min)) + this.min;
 
-            if (this.isSpawnFullyScaled) {
+            if (this.isSpawnFullyScaled)
+            {
                 next.scale.x = next.scale.y = finalScale;
-            }   else {
-                next.scale.x = next.scale.y = 0;
-                next.config['finalScale'] = finalScale;
             }
-        
+            else
+            {
+                next.scale.x = next.scale.y = 0;
+                next.config.finalScale = finalScale;
+            }
+
             next = next.next;
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     updateParticle(particle: Particle, deltaSec: number): void
     {
-        console.log('particle updated');
-        if (!this.isSpawnFullyScaled && particle.age < this.scaleDuration) {
-            let mult = this.scale.interpolate(particle.age / this.scaleDuration)
-            console.log(mult);
-            particle.scale.x = particle.scale.y = particle.config['finalScale'] * mult
+        if (!this.isSpawnFullyScaled && particle.age < this.scaleDuration)
+        {
+            const mult = this.scale.interpolate(particle.age / this.scaleDuration);
+
+            particle.scale.x = particle.scale.y = particle.config.finalScale * mult;
         }
     }
 }
