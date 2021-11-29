@@ -105,8 +105,8 @@ export class StaticSpeedBehavior implements IEmitterBehavior
     public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Late;
-    private min: number;
-    private max: number;
+    public min: number;
+    public max: number;
     constructor(config: {
         /**
          * Minimum speed when initializing the particle.
